@@ -1,10 +1,9 @@
 "use client";
 
-import { FC } from "react";
 import { ButtonProps } from "./types";
 import clsx from "clsx";
 
-export const Button: FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
     type,
     onClick,
     disabled,

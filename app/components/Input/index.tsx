@@ -1,9 +1,8 @@
 "useClient";
 import clsx from "clsx";
 import { InputProps } from "./types";
-import { FC } from "react";
 
-export const Input: FC<InputProps> = ({
+export const Input: React.FC<InputProps> = ({
     label,
     id,
     type,
