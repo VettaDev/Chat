@@ -10,7 +10,7 @@ import { ConversationItem } from "./ConversationItem";
 
 interface ConversationListProps {
     initialItems: FullConversationType[];
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 export const ConversationList: React.FC<ConversationListProps> = ({
     initialItems,

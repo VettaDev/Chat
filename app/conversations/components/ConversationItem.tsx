@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
+import { convertToObject } from "typescript";
 
 interface ConversationItemProps {
     data: FullConversationType;
@@ -22,9 +23,7 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
     const router = useRouter();
 
     const handleClick = useCallback(() => {
-        () => {
-            router.push(`/conversations/${data.id}`);
-        };
+        router.push(`/conversations/${data.id}`);
     }, [data.id, router]);
 
     const lastMessage = useMemo(() => {

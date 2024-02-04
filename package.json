@@ -25,7 +25,7 @@
     "lodash": "^4.17.21",
     "next": "13.3.1",
     "next-auth": "^4.24.5",
-    "next-cloudinary": "^4.4.0",
+    "next-cloudinary": "^4.28.0",
     "postcss": "8.4.21",
     "pusher": "^5.1.2",
     "pusher-js": "^8.0.2",

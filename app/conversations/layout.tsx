@@ -1,21 +1,26 @@
-import React from "react";
+import { getConversations } from "../actions/getConversations";
+import { getUsers } from "../actions/getUsers";
 import Menu from "../components/Menu";
 import { ConversationList } from "./components/ConversationList";
-import { getConversations } from "../actions/getConversations";
 
-export default async function ConversationLayout({
+export default async function ConversationsLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const conversatios = await getConversations();
+    const conversations = await getConversations();
+    const users = await getUsers();
+
     return (
-        //@ts-expect-error Server Component
+        // @ts-expect-error Server Component
         <Menu>
             <div className="h-full">
-                <ConversationList initialItems={conversatios}>
-                    {children}
-                </ConversationList>
+                <ConversationList
+                    // users={users}
+                    // title="Messages"
+                    initialItems={conversations}
+                />
+                {children}
             </div>
         </Menu>
     );
