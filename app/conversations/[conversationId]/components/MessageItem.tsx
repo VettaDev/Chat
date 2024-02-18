@@ -3,9 +3,10 @@ import { Avatar } from "@/app/components/Avatar";
 import { FullMessageType } from "@/app/types";
 import clsx from "clsx";
 import { format } from "date-fns";
-import { is } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
+import PreviewImageModal from "./PreviewImageModal";
 
 interface MessageItemProps {
     data: FullMessageType;
@@ -14,6 +15,7 @@ interface MessageItemProps {
 
 const MessageItem: React.FC<MessageItemProps> = ({ isLast, data }) => {
     const session = useSession();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const isOwn = session?.data?.user?.email === data.sender.email;
     const seenList = (data.seenBy || [])
         .filter((user) => user.email !== data?.sender?.email)
@@ -47,8 +49,14 @@ const MessageItem: React.FC<MessageItemProps> = ({ isLast, data }) => {
                     </div>
                 </div>
                 <div className={message}>
+                    <PreviewImageModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        src={""}
+                    />
                     {data.image ? (
                         <Image
+                            onClick={() => setIsModalOpen(true)}
                             src={data.image}
                             width={200}
                             height={200}

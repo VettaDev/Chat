@@ -1,9 +1,9 @@
 "use client";
 
 import { Avatar } from "@/app/components/Avatar";
+import LoadingModal from "@/app/conversations/[conversationId]/components/LoadingModal";
 import { User } from "@prisma/client";
 import axios from "axios";
-import { set } from "lodash";
 import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 
@@ -30,14 +30,17 @@ export const UserItem: React.FC<UserProps> = ({ data }) => {
             });
     }, [data, router]);
     return (
-        <div
-            onClick={handleClick}
-            className="relative w-full flex items-center space-x-3 p-3 hover:bg-neutral-100 rounded-lg cursor-pointer transition"
-        >
-            <Avatar user={data} />
-            <span className="text-sm font-semibold text-gray-900">
-                {data.name as string}
-            </span>
-        </div>
+        <>
+            {isLoading && <LoadingModal />}
+            <div
+                onClick={handleClick}
+                className="relative w-full flex items-center space-x-3 p-3 hover:bg-neutral-100 rounded-lg cursor-pointer transition"
+            >
+                <Avatar user={data} />
+                <span className="text-sm font-semibold text-gray-900">
+                    {data.name as string}
+                </span>
+            </div>
+        </>
     );
 };

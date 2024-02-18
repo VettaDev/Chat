@@ -5,9 +5,12 @@ import { useOtherUser } from "@/app/hooks/useOtherUsers";
 import { Dialog, Transition } from "@headlessui/react";
 import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
-import { Fragment, use, useMemo, useState } from "react";
-import { IoClose, IoTrash } from "react-icons/io5";
-import ConfirmModal from "./ConfirmModal";
+import { Fragment, useMemo, useState } from "react";
+import { IoTrash } from "react-icons/io5";
+import ConfirmModal from "../../../components/Modals/ConfirmModal";
+import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/app/hooks/useActiveList";
+import CloseButton from "@/app/components/Buttons/CloseButton";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -25,6 +28,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), "PP");
     }, [otherUser.createdAt]);
+    const { members } = useActiveList();
+    const isActive = members.indexOf(otherUser.email!) !== -1;
 
     const title = useMemo(() => {
         return data.name || otherUser.name;
@@ -34,16 +39,13 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
         if (data.isGroup) {
             return `${data.users.length} members`;
         }
-        return "Active";
+        return isActive ? "Active" : "Offline";
     }, [data.isGroup, data.users.length]);
     return (
         <>
             <ConfirmModal
                 isOpen={isConfirmOpen}
                 onClose={() => setIsConfirmOpen(false)}
-                onConfirm={() => {
-                    console.log("Delete");
-                }}
             />
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -74,25 +76,26 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                             <div className="px-4 sm:px-6">
                                                 <div className="flex items-start justify-end">
                                                     <div className="flex items-center h-7 ml-3">
-                                                        <button
-                                                            type="button"
-                                                            className="rounded-md bg-white border-none text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 "
+                                                        <CloseButton
                                                             onClick={onClose}
-                                                        >
-                                                            <span className="sr-only">
-                                                                Close panel
-                                                            </span>
-                                                            <IoClose size="24" />
-                                                        </button>
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="relative flex-1 mt-6 px-4 sm:px-6">
                                                 <div className="flex flex-col items-center">
                                                     <div className="mb-2">
-                                                        <Avatar
-                                                            user={otherUser}
-                                                        />
+                                                        {data.isGroup ? (
+                                                            <AvatarGroup
+                                                                users={
+                                                                    data.users
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            <Avatar
+                                                                user={otherUser}
+                                                            />
+                                                        )}
                                                     </div>
                                                     <div>{title}</div>
                                                     <div className="text-sm text-gray-500">

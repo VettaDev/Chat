@@ -27,25 +27,26 @@
     "next-auth": "^4.24.5",
     "next-cloudinary": "^4.28.0",
     "postcss": "8.4.21",
-    "pusher": "^5.1.2",
-    "pusher-js": "^8.0.2",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
     "react-loading-skeleton": "^3.2.1",
-    "react-select": "^5.7.2",
+    "react-select": "^5.8.0",
     "react-spinners": "^0.13.8",
+    "styled-components": "^6.1.8",
     "superjson": "^1.12.3",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4",
-    "zustand": "^4.3.7"
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@types/bcrypt": "^5.0.2",
-    "@types/lodash": "^4.14.194",
+    "@types/lodash": "^4.14.202",
     "prisma": "^4.13.0"
   }
 }

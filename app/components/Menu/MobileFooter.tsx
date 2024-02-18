@@ -1,11 +1,12 @@
 "use client";
 
-import useRoutes from "@/app/hooks/useRoutes";
 import useConversation from "@/app/hooks/useConversation";
 import MobileFooterItem from "./components/MobileFooterItem";
+import useNavigation from "@/app/hooks/useNavigation";
+import styled from "styled-components";
 
 export const MobileFooter = () => {
-    const routes = useRoutes();
+    const routes = useNavigation();
     const { isOpen } = useConversation();
 
     if (isOpen) {
@@ -13,10 +14,7 @@ export const MobileFooter = () => {
     }
 
     return (
-        <ul
-            role="list"
-            className="lg:hidden flex flex-row justify-around items-center space-y-1 w-full  fixed bottom-0 z-40 bg-white border-t-[1px]"
-        >
+        <FooterMenu>
             {routes.map((route) => (
                 <MobileFooterItem
                     key={route.label}
@@ -26,6 +24,22 @@ export const MobileFooter = () => {
                     onClick={route.onClick}
                 />
             ))}
-        </ul>
+        </FooterMenu>
     );
 };
+
+const FooterMenu = styled.ul`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 40;
+    background-color: white;
+    border-top: 1px;
+    @media (min-width: 1024px) {
+        display: none;
+    }
+`;

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 import { convertToObject } from "typescript";
+import AvatarGroup from "@/app/components/AvatarGroup";
 
 interface ConversationItemProps {
     data: FullConversationType;
@@ -56,7 +57,11 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
             )}
             onClick={handleClick}
         >
-            <Avatar user={otherUser} />
+            {data.isGroup ? (
+                <AvatarGroup users={data.users} />
+            ) : (
+                <Avatar user={otherUser} />
+            )}
             <div className="flex-1 min-w-0">
                 <div className="focus:outline-none ">
                     <div className="flex justify-between items-center mb-1">

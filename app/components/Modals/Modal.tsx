@@ -1,14 +1,23 @@
 "use client";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import { IoClose } from "react-icons/io5";
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
+import CloseButton from "../Buttons/CloseButton";
+import { styled } from "styled-components";
+import { IModal } from "@/app/types/modal";
+
+interface ModalProps extends IModal {
     children: React.ReactNode;
+    title?: string;
+    subtitle?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+    isOpen,
+    onClose,
+    children,
+    title,
+    subtitle,
+}) => {
     return (
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog
@@ -32,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                         as={Fragment}
                         enter="ease-out duration-300"
                         enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        enterTo="opacity-100 translate-y-0sm:scale-100"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
                         leave="ease-in duration-200"
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -41,17 +50,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                             className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 text-left shadow-xsl transition-all w-full sm:my-8 sm:w-full sm:max-w-lg sm:p-6
                          "
                         >
-                            <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block z-10">
-                                <button
-                                    type="button"
-                                    onClick={onClose}
-                                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-                                >
-                                    <span className="sr-only">Close</span>
-                                    <IoClose className="w-6 h-6" />
-                                </button>
-                            </div>
-                            {children}
+                            <Body>
+                                <CloseButton onClick={onClose} />
+                                {title && (
+                                    <h1 className="text-xl font-semibold">
+                                        {title}
+                                    </h1>
+                                )}
+                                {subtitle && (
+                                    <p className="text-sm text-neutral-500 mb-4">
+                                        {subtitle}
+                                    </p>
+                                )}
+                                {children}
+                            </Body>
                         </Dialog.Panel>
                     </Transition.Child>
                 </div>
@@ -61,3 +73,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 };
 
 export default Modal;
+
+const Body = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    width: 100%;
+`;
