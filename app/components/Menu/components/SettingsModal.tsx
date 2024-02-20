@@ -83,25 +83,28 @@ const SettingsModal: React.FC<ISettingsModal> = ({
                     Photo
                 </label>
 
-                <Image
-                    src={
-                        image || currentUser?.image || "/images/placeholder.jpg"
-                    }
-                    alt="User avatar"
-                    width="48"
-                    height="48"
-                    className="rounded-full h-[48px]"
-                />
-                <CldUploadButton
-                    options={{ maxFiles: 1 }}
-                    onUpload={handleUpload}
-                    uploadPreset="naebskgj"
-                >
-                    <Button disabled={isLoading} type="button" secondary>
-                        Change
-                    </Button>
-                </CldUploadButton>
-
+                <div className="flex gap-2">
+                    <Image
+                        src={
+                            image ||
+                            currentUser?.image ||
+                            "/images/placeholder.jpg"
+                        }
+                        alt="User avatar"
+                        width="48"
+                        height="48"
+                        className="rounded-full h-[48px]"
+                    />
+                    <CldUploadButton
+                        options={{ maxFiles: 1 }}
+                        onUpload={handleUpload}
+                        uploadPreset="naebskgj"
+                    >
+                        <Button disabled={isLoading} type="button" secondary>
+                            Change
+                        </Button>
+                    </CldUploadButton>
+                </div>
                 <ModalActionButtons
                     onCancel={onClose}
                     disabled={isLoading}
