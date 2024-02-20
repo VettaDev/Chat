@@ -24,6 +24,7 @@ export const Input: React.FC<InputProps> = ({
                     id={id}
                     type={type}
                     disabled={disabled}
+                    autoComplete="on"
                     {...register(id, { required })}
                     className={clsx(
                         `
