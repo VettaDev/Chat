@@ -1,5 +1,5 @@
-import { getUsers } from "../actions/getUsers";
-import Menu from "../components/Menu";
+import { getUsers } from "@/app/actions/getUsers";
+import Menu from "@/app/components/Menu";
 import { UserList } from "./components/UserList";
 
 export default async function UsersLayout({
@@ -11,10 +11,8 @@ export default async function UsersLayout({
     return (
         //@ts-expect-error Server Component
         <Menu>
-            <div className="h-full">
-                <UserList users={users!} />
-                {children}
-            </div>
+            <UserList users={users!} />
+            {children}
         </Menu>
     );
 }

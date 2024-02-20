@@ -8,6 +8,9 @@ import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import ProfileDrawer from "./ProfileDrawer";
 import AvatarGroup from "@/app/components/AvatarGroup";
 import useActiveList from "@/app/hooks/useActiveList";
+import ActionIcon from "@/app/components/ActionIcon";
+import SecondaryText from "@/app/components/SecondaryText";
+import PrimaryText from "@/app/components/PrimaryText";
 
 interface HeaderProps {
     conversation: Conversation & {
@@ -49,18 +52,23 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
                         <Avatar user={otherUser} />
                     )}
                     <div className="flex flex-col">
-                        <div>{conversation.name || otherUser.name}</div>
-                        {isActive && (
-                            <div className="text-sm font-light text-neutral-500">
-                                {statusText}
-                            </div>
-                        )}
+                        {conversation.name ||
+                            (otherUser.name && (
+                                <PrimaryText
+                                    text={conversation.name || otherUser.name}
+                                />
+                            ))}
+                        {!isActive && <SecondaryText text={statusText} />}
                     </div>
                 </div>
-                <HiEllipsisHorizontal
-                    size={32}
+                <ActionIcon
                     onClick={() => setDrowerOpen(true)}
-                    className="text-sky-500 hover:text-sky-600 cursor-pointer transition"
+                    icon={
+                        <HiEllipsisHorizontal
+                            size={32}
+                            className="text-sky-500 hover:text-sky-600 cursor-pointer transition"
+                        />
+                    }
                 />
             </div>
         </>

@@ -1,6 +1,6 @@
-import { getConversations } from "../actions/getConversations";
-import { getUsers } from "../actions/getUsers";
-import Menu from "../components/Menu";
+import { getConversations } from "@/app/actions/getConversations";
+import { getUsers } from "@/app/actions/getUsers";
+import Menu from "@/app/components/Menu";
 import { ConversationList } from "./components/ConversationList";
 
 export default async function ConversationsLayout({

@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingModal from "../conversations/[conversationId]/components/LoadingModal";
+import LoadingModal from "@/app/conversations/[conversationId]/components/LoadingModal";
 
 const Loading = () => {
     return <LoadingModal />;

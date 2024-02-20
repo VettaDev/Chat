@@ -8,8 +8,9 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
-import { convertToObject } from "typescript";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import SecondaryText from "@/app/components/SecondaryText";
+import PrimaryText from "@/app/components/PrimaryText";
 
 interface ConversationItemProps {
     data: FullConversationType;
@@ -62,29 +63,27 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
             ) : (
                 <Avatar user={otherUser} />
             )}
-            <div className="flex-1 min-w-0">
-                <div className="focus:outline-none ">
-                    <div className="flex justify-between items-center mb-1">
-                        <p className="text-md font-medium to-gray-300">
-                            {data.name || otherUser.name}
-                        </p>
-                        {lastMessage && (
-                            <p className="test-xs text-gray-400 font-light">
-                                {format(new Date(lastMessage.createdAt), "p")}
-                            </p>
-                        )}
-                    </div>
-                    <p
-                        className={clsx(
-                            `truncate text-sm`,
-                            hasSeen
-                                ? "text-gray-500"
-                                : "text-black font-medium",
-                        )}
-                    >
-                        {lastMessageText}
-                    </p>
+
+            <div className="focus:outline-none flex-1 min-w-0">
+                <div className="flex justify-between items-center mb-1">
+                    {data.name ||
+                        (otherUser.name && (
+                            <PrimaryText text={data.name || otherUser.name} />
+                        ))}
+                    {lastMessage && (
+                        <SecondaryText
+                            text={format(new Date(lastMessage.createdAt), "p")}
+                        />
+                    )}
                 </div>
+                <p
+                    className={clsx(
+                        `truncate text-sm`,
+                        hasSeen ? "text-gray-500" : "text-black font-medium",
+                    )}
+                >
+                    {lastMessageText}
+                </p>
             </div>
         </div>
     );

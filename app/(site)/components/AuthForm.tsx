@@ -83,9 +83,9 @@ export const AuthForm = () => {
         <>
             {isLoading && <LoadingModal />}
             <div className="mt-8 sm:mx-auto sm:w-fill sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div className="bg-white py-8 px-4 shadow sm:rounded-lg w-[300px] sm:px-10 sm:w-[400px]">
                     <form
-                        className="space-y-6 mb-6"
+                        className="space-y-6 mb-6 "
                         onSubmit={handleSubmit(onSubmit)}
                     >
                         {/* handleSubmit wrapper fn need to get data in onSubmit props */}
@@ -114,16 +114,11 @@ export const AuthForm = () => {
                             errors={errors}
                             disabled={isLoading}
                         />
-                        <div>
-                            <Button
-                                type="submit"
-                                disabled={isLoading}
-                                fulllWidth
-                            >
-                                {/* do not need onClick because btn in form  */}
-                                {variant === "LOGIN" ? "Sign in" : "Register"}
-                            </Button>
-                        </div>
+
+                        <Button type="submit" disabled={isLoading} fulllWidth>
+                            {/* do not need onClick because btn in form  */}
+                            {variant === "LOGIN" ? "Sign in" : "Register"}
+                        </Button>
                     </form>
                     <div className="mt-6">
                         <div className="relative">

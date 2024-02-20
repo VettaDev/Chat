@@ -12,6 +12,9 @@ import { User } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { pusherClient } from "@/app/libs/pusher";
 import { find } from "lodash";
+import Title from "@/app/components/Title";
+import ActionIcon from "@/app/components/ActionIcon";
+import Sidebar from "@/app/components/Sidebar";
 
 interface ConversationListProps {
     initialItems: FullConversationType[];
@@ -85,42 +88,22 @@ export const ConversationList: React.FC<ConversationListProps> = ({
                 onClose={() => setIsModalOpen(false)}
                 users={users}
             />
-            <aside
-                className={clsx(
-                    `fixed
-        inset-y-0
-        pb-20
-        lg:pb-0
-        lg:left-20
-        lg:w-80
-        lg:block
-        overflow-y-auto
-        border-r
-        border-gray-200`,
-                    isOpen ? "hidden" : "block w-full left-0",
-                )}
-            >
-                <div className="px-5">
-                    <div className="flex justify-between mb-4 pt-4">
-                        <div className="text-2xl font-bold text-neutral-800">
-                            Messages
-                        </div>
-                        <div
-                            className="rounded-full p-2 bg-gray-100 text-gray-600 cursor-pointer hover:opacity-75 transition"
-                            onClick={() => setIsModalOpen(true)}
-                        >
-                            <MdOutlineGroupAdd size={20} />
-                        </div>
-                    </div>
-                    {items.map((item) => (
-                        <ConversationItem
-                            key={item.id}
-                            data={item}
-                            selected={conversationId === item.id}
-                        />
-                    ))}
+            <Sidebar>
+                <div className="flex justify-between mb-4 pt-4 px-5">
+                    <Title text={"Conversations"} />
+                    <ActionIcon
+                        onClick={() => setIsModalOpen(true)}
+                        icon={<MdOutlineGroupAdd size={20} />}
+                    />
                 </div>
-            </aside>
+                {items.map((item) => (
+                    <ConversationItem
+                        key={item.id}
+                        data={item}
+                        selected={conversationId === item.id}
+                    />
+                ))}
+            </Sidebar>
         </>
     );
 };

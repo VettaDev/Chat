@@ -7,7 +7,7 @@ import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { IoTrash } from "react-icons/io5";
-import ConfirmModal from "../../../components/Modals/ConfirmModal";
+import ConfirmModal from "@/app/components/Modals/ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
 import useActiveList from "@/app/hooks/useActiveList";
 import CloseButton from "@/app/components/Buttons/CloseButton";

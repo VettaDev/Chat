@@ -1,16 +1,16 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import ModalActionButtons from "@/app/components/Buttons/ModalActionButtons";
 import { Input } from "@/app/components/Input";
 import Modal from "@/app/components/Modals/Modal";
 import Select from "@/app/components/Select";
 import { IModal } from "@/app/types/modal";
-import { User } from "@prisma/client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 
 interface ModalProps extends IModal {
     users?: User[];
