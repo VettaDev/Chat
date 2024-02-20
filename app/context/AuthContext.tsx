@@ -9,7 +9,7 @@ export default function AuthContext({ children }: AuthContextProps) {
     useEffect(() => {
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker
-                .register("../../public/service-worker.js")
+                .register("../../service-worker.js")
                 .then((registration) =>
                     console.log("scope is: ", registration.scope),
                 );
